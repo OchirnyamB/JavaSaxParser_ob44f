@@ -17,7 +17,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * @author ob44f
  */
 public class ParseXMLLoader {
-    private static String textBody;
+    private static String textBody="";
     public static void load(File xmlCourseFile) throws Exception{
         try{
             SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -25,7 +25,7 @@ public class ParseXMLLoader {
             DefaultHandler handler = new DefaultHandler(){
                 @Override
                 public void startDocument() throws SAXException {
-                    textBody += "\nStart of Document:\n";
+                    textBody += "Start of Document:\n";
                 }
 
                 @Override
