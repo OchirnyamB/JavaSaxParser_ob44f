@@ -5,12 +5,15 @@
  */
 package javasaxparser_ob44f;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.stage.FileChooser;
 
 /**
  *
@@ -19,14 +22,26 @@ import javafx.scene.control.Label;
 public class XMLDocumentController implements Initializable {
     
     @FXML
-    private Label label;
+    private TextArea textArea;
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+    private void handleOpen(ActionEvent event) throws Exception {
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(textArea.getScene().getWindow());
+        if (file != null) {
+            ParseXMLLoader loader = new ParseXMLLoader();
+            loader.load(file);
+            if(!loader.getTextBody().isEmpty()){
+               textArea.setText("");    // clear window before appending
+               textArea.setText(loader.getTextBody());    // generate textBody
+               loader.setTextBody();    // clear textBody after finishing
+            }
+        }
+    } 
+    @FXML
+    private void handleClear(ActionEvent event) {
+        textArea.setText("");
     }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

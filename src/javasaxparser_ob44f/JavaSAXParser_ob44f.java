@@ -24,6 +24,7 @@ public class JavaSAXParser_ob44f extends Application {
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.setTitle("XML Parser");
         stage.show();
     }
 
